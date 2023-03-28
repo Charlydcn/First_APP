@@ -1,0 +1,93 @@
+* {
+    font-family: poppins;
+}
+
+body {
+    background: -webkit-radial-gradient(circle, rgb(192, 208, 214) 1%, rgb(194, 215, 224) 100%);
+}
+
+/************************* index */
+
+h1 {
+    color:2E2C23;
+    font-weight: 400;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width:40%;
+    border-radius:25px;
+    padding:2rem;
+    background-color: rgb(214, 228, 233);
+    transition: .5s;
+}
+
+form label {
+    display: flex;
+    width:60%;
+    flex-direction: column;
+    color:#2E2C23;
+    font-weight: 500;
+    font-size: 1.2rem;
+}
+
+form input {
+    border-radius: 5px;
+    border: none;
+    outline:none;
+    height: 1.75rem;
+}
+
+p:last-of-type input {
+    font-size: 1.2rem;
+    padding: 1.5rem;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    transition: .5s;
+}
+
+p:last-of-type {
+    display: flex;
+    justify-content: flex-end;
+    transition: .5s;
+}
+
+p:last-of-type:hover input {
+    translate:7.5px;
+    background-color: #7aa7b8;
+    color:#e3eeee;
+    cursor:pointer;
+}
+
+/* ************************** recap */
+
+#products_list {
+    border-collapse:collapse;
+    padding:5px;
+    width:100%;
+    background-color: rgb(214, 228, 233);
+}
+
+#products_list tfoot tr, thead {
+    background-color: rgb(245, 245, 245);
+}
+
+#products_list th {
+    font-size: 0.85rem;
+    padding:1.25rem;
+}
+
+#products_list th, #products-list td {    
+    text-align: start;
+}
+
+#products_list thead th:first-of-type {
+    width:30%;
+}
+
+#products_list td {
+    padding:1.25rem;
+    border-top: 1px rgb(202, 202, 202) solid;
+}
