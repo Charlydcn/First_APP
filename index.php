@@ -9,7 +9,7 @@ require "functions.php";
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <style> <?php include 'CSS/style.css'; ?> </style>
+    <link rel="stylesheet" href="CSS/style.css"/>
     <title>Ajout produit</title>
 </head>
 <body>
@@ -20,12 +20,12 @@ require "functions.php";
             <?=totalQtt()?>
         </a>
         <a href="index.php">
-            Ajout d'un produit
+            Accueil
         </a>
     </nav>
 
     <h1>Ajouter un produit</h1>
-    <form action="traitement.php" method="post" autocomplete="off">
+    <form action="traitement.php?action=addProduct" method="post" autocomplete="off">
         <p>
             <label>
                 Nom du produit :
