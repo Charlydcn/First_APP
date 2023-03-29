@@ -52,5 +52,7 @@ require "functions.php";
         </p>
     </form>
 
+    <?=getMessages()?>
+
 </body>
 </html>
