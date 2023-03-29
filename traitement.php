@@ -1,10 +1,8 @@
 <?php
-
+session_start();
 require "functions.php";
 
 $id = (isset($_GET['id'])) ? $_GET['id'] : null;
-
-
 
 if (isset($_GET['action'])) {
     switch($_GET['action']){
@@ -15,7 +13,7 @@ if (isset($_GET['action'])) {
 
             if (isset($_POST['submit'])) { // On vérifie l'existence de la clé 'submit' dans le tableau $_POST
 
-                $name = filter_input(INPUT_POST, "name", FILTER_SANITIZE_STRING);
+                $name = filter_input(INPUT_POST, "name", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
                 $price = filter_input(INPUT_POST, "price", FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
                 $qtt = filter_input(INPUT_POST, "qtt", FILTER_VALIDATE_INT);
                 // filter_input() permet d'effectuer une validation/nettoyage de chaque donnée transmise par le formulaire via divers filtres:
@@ -28,7 +26,7 @@ if (isset($_GET['action'])) {
                 if ($price > 0 && $qtt > 0) {
 
                     if ($name && $price && $qtt) { // Donc si les trois variables sont jugées positives par PHP (pas "false" ou "null", mais bien une valeur texte/nombres etc.)
-                        
+                    //  var_dump("ok");die;   
                         $product = [
                             "name" => $name,
                             "price" => $price,
@@ -47,9 +45,7 @@ if (isset($_GET['action'])) {
             header("Location:index.php"); // Si elle n'existe pas, on redirige vers l'index.php avec la fonction "header"
             // La fonction "header" ne doit pas être utilisé si la page a déjà émis un début de réponse (afficher du HTML, echo(), print(), ou autre header() sous
             // peine de perturber la réponse à émmettre au client), et elle doit impérativement être exécuter en dernier
-            break;
-        
-        
+            break;        
 
         case "emptyBasket":
             delete($id);
@@ -72,4 +68,5 @@ if (isset($_GET['action'])) {
             break;    
 
     }
+
 }

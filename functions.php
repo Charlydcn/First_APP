@@ -1,5 +1,4 @@
 <?php
-session_start();
 
 function totalQtt() {
     
@@ -59,3 +58,5 @@ function getMessages() {
     }
     return false;
 }
+
+?>

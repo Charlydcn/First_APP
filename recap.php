@@ -1,52 +1,31 @@
 <?php
-require "functions.php";
-?>
 
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="CSS/style.css"/>
-   
-    <title>Récapitulatif des produits</title>
-</head>
+    session_start();
+    ob_start();
 
-<body>
-
-    <nav>
-        <a href="recap.php">
-            <i class="fa-sharp fa-solid fa-cart-shopping"> </i>
-            <?=totalQtt()?>
-        </a>
-        <a href="index.php">
-            Accueil
-        </a>
-    </nav>
-
-    <?php 
-    
     if(!isset($_SESSION['products']) || empty($_SESSION['products'])) { // SI products[] n'existe pas, ou qu'il est vide, alors
-    echo "<h1>Le panier est vide !</h1>";
+        echo "<h1>Le panier est vide !</h1>";
     } else {
-        echo "<table id='products_list'>",
-                "<thead>",
-                    "<tr>",
-                        "<th>#</th>",
-                        "<th>Nom</th>",
-                        "<th>Prix</th>",
-                        "<th>Quantité</th>",
-                        "<th>Total</th>",
-                        "<th></th>",
-                    "</tr>",
-                "</thead>",
-                "<tbody>";
+        echo "<table id='products_list'>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nom</th>
+                        <th>Prix</th>
+                        <th>Quantité</th>
+                        <th>Total</th>
+                        <th></th>
+                    </tr>
+                </thead>";
 
         $totalGeneral = 0;
+        $totalProducts = 0;
+
         foreach($_SESSION['products'] as $index => $product) { // Pour chaque product dans l'index du tableau products,
-            echo "<tr>",
+            $totalProducts += $product["qtt"];
+            echo "<tbody>
+                    <tr>",
                         "<td>".$index."</td>",
 
                         "<td>".$product['name']."</td>",
@@ -66,28 +45,25 @@ require "functions.php";
                         "</tr>"  ;
                         $totalGeneral+= $product['total'];
         }
-        echo "<tfoot>
+        
+        echo "</tbody><tfoot>
             <tr>",
                 "<td colspan=4>Nombre de produits : </td>",
-                "<td><strong>" . totalQtt() . "</strong></td>",
+                "<td><strong>".$totalProducts."</strong></td>",
             "</tr>",
         
             "<tr>",
                 "<td colspan=4>Total du panier : </td>",
                 "<td><strong>" . number_format($totalGeneral, 2, ",", "&nbsp;")."&nbsp;€</strong></td>",
             "</tr>",
-            "</tfoot></tbody>",
-
-            "</tbody>",
+            "</tfoot>",
             "</table>",
 
             "<a href='traitement.php?action=emptyBasket'>Vider le panier</a>";
-
     }
 
+    $content = ob_get_clean();
+    $title = "Panier";
+    require 'template.php';
 
-    ?>
-
-</body>
-
-</html>
+?>
