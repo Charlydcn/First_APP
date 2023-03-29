@@ -52,7 +52,7 @@ if (isset($_GET['action'])) {
         
 
         case "emptyBasket":
-            delete();
+            delete($id);
             header("Location:recap.php");
             break;
 
