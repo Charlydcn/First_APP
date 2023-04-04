@@ -18,12 +18,10 @@ function delete($id) {
    
     if ($id == null) {
         unset($_SESSION['products']);
-        var_dump("pas good");
     }
 
     else {
         unset($_SESSION['products'][$id]);
-        var_dump("good");
     }
 }
 
