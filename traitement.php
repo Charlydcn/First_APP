@@ -16,21 +16,49 @@ if (isset($_GET['action'])) {
                 $name = filter_input(INPUT_POST, "name", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
                 $price = filter_input(INPUT_POST, "price", FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
                 $qtt = filter_input(INPUT_POST, "qtt", FILTER_VALIDATE_INT);
-                // filter_input() permet d'effectuer une validation/nettoyage de chaque donnée transmise par le formulaire via divers filtres:
-                // SANITIZE_STRING : supprime tout caractères spéciaux/balises HTML/encode d'une chaîne de caractère
-                // VALIDATE_FLOAT : n'accepte que la valeur si elle est de type float (pas de texte etc.)
-                // FLAG_ALLOW_FRACTION : pour accepter l'utilisation de "," ou "." pour la décimale
-                // VALIDATE_INT : n'accepte que les int
+                $description = filter_input(INPUT_POST, "description", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+
+                    // //************************ IMAGE *********************************
+
+                    if(isset($_FILES['img'])) {
+                        $imgTmpName = $_FILES['img']['tmp_name'];
+                        $imgName = $_FILES['img']['name'];
+                        $imgSize = $_FILES['img']['size'];
+                        $imgError = $_FILES['img']['error'];
+    
+                        $tabExtension = explode('.', $imgName);
+                        $extension = strtolower(end($tabExtension));
+    
+                        //Tableau des extensions que l'on accepte
+                        $extensions = ['jpg', 'png', 'jpeg', 'gif'];
+                        $maxSize = 400000;
+    
+                        if(in_array($extension, $extensions) && $imgSize <= $maxSize && $imgError == 0){
+                            $uniqueName = uniqid('', true); // uniqid génère un ID random (exemple 5f586bf96dcd38.73540086)
+                            $img = $uniqueName.'.'.$extension;
+                            move_uploaded_file($imgTmpName, './upload/'.$img);
+                        }
+                        else{
+                            echo "Mauvaise extension ou image trop volumineuse";
+                        }
+
+                        
+
+                    }
+
+                    // //****************************************************************
 
                 // Le filter renvoie la valeur assainie en cas de succès, false si le filtre échoue ou null si le champ n'existe pas
                 if ($price > 0 && $qtt > 0) {
 
-                    if ($name && $price && $qtt) { // Donc si les trois variables sont jugées positives par PHP (pas "false" ou "null", mais bien une valeur texte/nombres etc.)
-                    //  var_dump("ok");die;   
+                    if ($name && $price && $qtt && $description) { // Donc si les trois variables sont jugées positives par PHP (pas "false" ou "null", mais bien une valeur texte/nombres etc.)
                         $product = [
                             "name" => $name,
                             "price" => $price,
                             "qtt" => $qtt,
+                            "img" => $img,
+                            "description" => $description,
                             "total" => $price*$qtt
                         ];
 

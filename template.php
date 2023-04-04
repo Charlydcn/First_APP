@@ -34,6 +34,7 @@
     <footer>
     </footer>
 
+    <script src='modal.js'></script>";
 
 </body>
 </html>

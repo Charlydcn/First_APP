@@ -89,9 +89,7 @@ form p:last-of-type input {
 }
 
 form p:last-of-type {
-    display: flex;
-    justify-content: flex-end;
-    transition: .5s;
+    width:fit-content;
 }
 
 form p:last-of-type:hover input {
@@ -107,7 +105,6 @@ form p:last-of-type:hover input {
     border-collapse:collapse;
     padding:5px;
     margin:1.5rem 0;
-    width:100%;
     background-color: rgb(214, 228, 233);
 }
 
@@ -202,3 +199,63 @@ h3 {
     width: fit-content;
     margin: 0;
 }
+
+/* ************************** product details modal */
+
+/* Styles pour la modal */
+
+.modal {
+    /* Définir la modal comme position fixe pour qu'elle soit centrée sur l'écran */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Ajouter une couleur de fond semi-transparente */
+    z-index: 1; /* Définir une valeur z-index supérieure pour s'assurer que la modal est en avant-plan */
+    display: none; /* Cacher la modal par défaut */
+  }
+
+  
+/* Styles pour le contenu de la modal */
+.modal_content {
+    background-color: white;
+    border-radius: 5px;
+    padding: 20px;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centrer le contenu de la modal horizontalement et verticalement */
+    max-width: 80%; /* Limiter la largeur du contenu pour éviter que la modal ne soit trop grande sur les écrans larges */
+}
+
+.modal_content img {
+    width:40%;
+}
+
+figure {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:1.5rem;
+}
+  
+/* Styles pour le bouton de fermeture */
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 30px;
+    font-weight: bold;
+    color: #aaa;
+    cursor: pointer;
+    transition: .3s;
+}
+  
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+  
