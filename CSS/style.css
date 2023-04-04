@@ -77,6 +77,11 @@ form input {
     border: none;
     outline:none;
     height: 1.75rem;
+    transition:.5s;
+}
+
+form input:focus {
+    translate:5px;
 }
 
 form p:last-of-type input {
@@ -227,6 +232,10 @@ h3 {
     left: 50%;
     transform: translate(-50%, -50%); /* Centrer le contenu de la modal horizontalement et verticalement */
     max-width: 80%; /* Limiter la largeur du contenu pour éviter que la modal ne soit trop grande sur les écrans larges */
+}
+
+.modal_btn {
+    cursor:pointer;
 }
 
 .modal_content img {
