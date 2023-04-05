@@ -76,12 +76,12 @@ if (isset($_GET['action'])) {
             break;        
 
         case "emptyBasket":
-            delete($id);
+            clear();
             header("Location:recap.php");
             break;
 
         case "deleteProduct":
-            delete($id);
+            deleteProduct($id);
             header("Location:recap.php");
             break;
 

@@ -14,15 +14,20 @@ function totalQtt() {
     }
 }
 
-function delete($id) {
-   
-    if ($id == null) {
-        unset($_SESSION['products']);
-    }
 
-    else {
-        unset($_SESSION['products'][$id]);
+function clear() {
+
+    $files = glob('upload/*');
+    foreach($files as $file) {
+        unlink($file);
     }
+    unset($_SESSION['products']);
+}
+
+
+function deleteProduct($id) {
+   
+    unset($_SESSION['products'][$id]);    
 }
 
 function decreaseQtt($id) {
@@ -32,7 +37,7 @@ function decreaseQtt($id) {
         refreshTotal($id);
 
     } else {
-        delete($id);
+        deleteProduct($id);
     }
 }
 
